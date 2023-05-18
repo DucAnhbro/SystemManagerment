@@ -43,7 +43,7 @@ namespace DataAccess
             return course;
         }
 
-        public static void SaveCourse(CourseDto course)
+        public static void SaveCourse(AddNewCourseDto course)
         {
             try
             {
@@ -51,7 +51,6 @@ namespace DataAccess
                 {
                     var courseEntity = new Course() 
                     {
-                        Id = course.Id,
                         CourseCode = course.CourseCode,
                         CourseName = course.CourseName,
                         InstructorName = course.InstructorName,
@@ -67,13 +66,21 @@ namespace DataAccess
             }
         }
 
-        public static void UpdateCourse(Course course)
+        public static void UpdateCourse(CourseDto course)
         {
             try
             {
                 using (var context = new PRN231_StudentMGTContext())
                 {
-                    context.Entry<Course>(course).State = EntityState.Modified;
+                    var courseEntity = new Course()
+                    {
+                        Id = course.Id,
+                        CourseCode = course.CourseCode,
+                        CourseName = course.CourseName,
+                        InstructorName = course.InstructorName,
+                        Credits = course.Credits
+                    };
+                    context.Courses.Update(courseEntity);
                     context.SaveChanges();
                 }
             }

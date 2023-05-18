@@ -10,8 +10,8 @@ namespace Repository.Interfaces
 
         List<Course> GetAllCourse();
         Course GetCourseById(int courseId);
-        void InsertCourse(CourseDto course);
-        void UpdateCourse(Course course);
+        void InsertCourse(AddNewCourseDto course);
+        void UpdateCourse(CourseDto course);
        void DeleteCourse(Course course);
     }
 }

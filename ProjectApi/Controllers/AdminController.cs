@@ -57,7 +57,7 @@ namespace ProjectApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult InsertNewCourse(CourseDto course)
+        public IActionResult InsertNewCourse(AddNewCourseDto course)
         {
             try
             {
@@ -71,15 +71,15 @@ namespace ProjectApi.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateCourse(Course course)
+        public IActionResult UpdateCourse(CourseDto course)
         {
             try
             {
                 _courseRepository.UpdateCourse(course);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
-                throw new Exception(ex.Message);
+                throw new Exception("Update fail");
             }
             return Ok();
         }

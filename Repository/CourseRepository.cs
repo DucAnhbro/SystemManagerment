@@ -12,7 +12,7 @@ namespace Repository
 
         public IEnumerable<Course> GetAllCourseByStudentId(int studentId) => CourseDao.GetAllCourseByStudentId(studentId);
         public Course GetCourseById(int courseId) => CourseDao.GetCourseById(courseId);
-        public void InsertCourse(CourseDto course) => CourseDao.SaveCourse(course);
-        public void UpdateCourse(Course course) => CourseDao.UpdateCourse(course);
+        public void InsertCourse(AddNewCourseDto course) => CourseDao.SaveCourse(course);
+        public void UpdateCourse(CourseDto course) => CourseDao.UpdateCourse(course);
     }
 }
