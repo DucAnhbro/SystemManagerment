@@ -1,4 +1,5 @@
 ﻿
+using BusinessObject.DTO;
 using BusinessObject.Models;
 
 namespace Repository.Interfaces
@@ -9,7 +10,7 @@ namespace Repository.Interfaces
 
         List<Course> GetAllCourse();
         Course GetCourseById(int courseId);
-        void InsertCourse(Course course);
+        void InsertCourse(CourseDto course);
         void UpdateCourse(Course course);
        void DeleteCourse(Course course);
     }

@@ -1,4 +1,5 @@
-﻿using BusinessObject.Models;
+﻿using BusinessObject.DTO;
+using BusinessObject.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess
@@ -42,13 +43,21 @@ namespace DataAccess
             return course;
         }
 
-        public static void SaveCourse(Course c)
+        public static void SaveCourse(CourseDto course)
         {
             try
             {
                 using (var context = new PRN231_StudentMGTContext())
                 {
-                    context.Courses.Add(c);
+                    var courseEntity = new Course() 
+                    {
+                        Id = course.Id,
+                        CourseCode = course.CourseCode,
+                        CourseName = course.CourseName,
+                        InstructorName = course.InstructorName,
+                        Credits = course.Credits
+                    };
+                    context.Courses.Add(courseEntity);
                     context.SaveChanges();
                 }
             }

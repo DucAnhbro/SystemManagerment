@@ -57,7 +57,7 @@ namespace ProjectApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult InsertNewCourse(Course course)
+        public IActionResult InsertNewCourse(CourseDto course)
         {
             try
             {
