@@ -124,5 +124,31 @@ namespace DataAccess
             }
             return user;
         }
+
+        public static void DeleteUser(User user)
+        {
+            try
+            {
+                using (var context = new PRN231_StudentMGTContext())
+                {
+                    //Todo: delete enrrolment 
+                    var u = context.Users.SingleOrDefault(c => c.Id == user.Id);
+                    var enrolment = context.Enrollments.SingleOrDefault(c => c.StudentId == user.Id);
+                    if(u!= null)
+                    {
+                       if(enrolment != null)
+                        {
+                            context.Enrollments.RemoveRange(enrolment);
+                        }
+                    }
+                    context.Users.Remove(u);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                throw new Exception("Delete fail");
+            }
+        }
     }
 }
