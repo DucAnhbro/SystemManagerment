@@ -1,14 +1,15 @@
-﻿using BusinessObject.Models;
+﻿using BusinessObject.DTO;
+using BusinessObject.Models;
 
 namespace Repository.Interfaces
 {
     public interface IUserRepository
     {
         List<User> GetAllUsers();
-        User GetUserById(int uId);
+        User GetUserById(int userId);
         void DeleteUser(User user);
-        void InsertUser(User user);
-        void UpdateProduct(User user);
+        void InsertUser(AddNewUserDto userDto);
+        void UpdateUser(AddNewUserDto userDto);
         public User checkLogin(string email, string password);
         public string GetRoleByEmail(string email);
         public User GetUserByEmail(string email);

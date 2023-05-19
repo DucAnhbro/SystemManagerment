@@ -1,4 +1,5 @@
-﻿using BusinessObject.Models;
+﻿using BusinessObject.DTO;
+using BusinessObject.Models;
 using DataAccess;
 using Repository.Interfaces;
 
@@ -11,12 +12,13 @@ namespace Repository
         public string GetRoleByEmail(string email) => UserDao.GetRoleByEmail(email);
 
         public User GetUserByEmail(string email) => UserDao.GetUserByEmail(email);
-        public void DeleteUser(User u) => UserDao.DeleteUser(u);
+        public void DeleteUser(User user) => UserDao.DeleteUser(user);
         public List<User> GetAllUsers() => UserDao.GetAllUsers();
 
-        public User GetUserById(int uId) => UserDao.GetUserById(uId);
-        public void InsertUser(User u) => UserDao.InsertUser(u);
-        public void UpdateProduct(User u) => UserDao.UpdateUser(u);
+        public User GetUserById(int userId) => UserDao.GetUserById(userId);
+
+        public void InsertUser(AddNewUserDto userDto) => UserDao.InsertUser(userDto);
+        public void UpdateUser(AddNewUserDto user) => UserDao.UpdateUser(user);
 
         public List<Role> GetAllRoles() => RoleDao.GetAllRoles();
 

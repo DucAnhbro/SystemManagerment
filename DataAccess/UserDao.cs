@@ -1,4 +1,5 @@
-﻿using BusinessObject.Models;
+﻿using BusinessObject.DTO;
+using BusinessObject.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -42,13 +43,26 @@ namespace DataAccess
             }
             return user;
         }
-        public static void InsertUser(User user)
+        public static void InsertUser(AddNewUserDto user)
         {
             try
             {
                 using (var context = new PRN231_StudentMGTContext())
                 {
-                    context.Users.Add(user);
+                    var userEntity = new User()
+                    {
+                        RoleId = user.RoleId,
+                        Username = user.Username,
+                        Password = user.Password,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        DateOfBirth = user.DateOfBirth,
+                        Gender = user.Gender,
+                        Address = user.Address,
+                        PhoneNumber = user.PhoneNumber,
+                        Email = user.Email
+                    };
+                    context.Users.Add(userEntity);
                     context.SaveChanges();
                 }
             }
@@ -57,13 +71,26 @@ namespace DataAccess
                 throw new Exception("Add fail");
             }
         }
-        public static void UpdateUser(User user)
+        public static void UpdateUser(AddNewUserDto user)
         {
             try
             {
                 using (var context = new PRN231_StudentMGTContext())
                 {
-                    context.Entry<User>(user).State = EntityState.Modified;
+                    var userEntity = new User()
+                    {
+                        RoleId = user.RoleId,
+                        Username = user.Username,
+                        Password = user.Password,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        DateOfBirth = user.DateOfBirth,
+                        Gender = user.Gender,
+                        Address = user.Address,
+                        PhoneNumber = user.PhoneNumber,
+                        Email = user.Email
+                    };
+                    context.Users.Update(userEntity);
                     context.SaveChanges();
                 }
             }
@@ -81,7 +108,7 @@ namespace DataAccess
             {
                 using (var context = new PRN231_StudentMGTContext())
                 {
-                    user = context.Users.Where(u => u.Password.Equals(password) && u.Email.Equals(email)).FirstOrDefault();
+                    user = context.Users.Where(u => u.Password.Equals(password) && u.Email.Equals(email)).FirstOrDefault()!;
                 }
             }
             catch (Exception ex)
@@ -133,7 +160,7 @@ namespace DataAccess
                 {
                     //Todo: delete enrrolment 
                     var u = context.Users.SingleOrDefault(c => c.Id == user.Id);
-                    var enrolment = context.Enrollments.SingleOrDefault(c => c.StudentId == user.Id);
+                    var enrolment = context.Enrollments.SingleOrDefault(c => c.UserId == user.Id);
                     if(u!= null)
                     {
                        if(enrolment != null)

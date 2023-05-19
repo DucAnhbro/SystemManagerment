@@ -55,16 +55,16 @@ namespace BusinessObject.Models
 
                 entity.Property(e => e.CourseId).HasColumnName("CourseID");
 
-                entity.Property(e => e.StudentId).HasColumnName("StudentID");
+                entity.Property(e => e.UserId).HasColumnName("UserID");
 
                 entity.HasOne(d => d.Course)
                     .WithMany(p => p.Enrollments)
                     .HasForeignKey(d => d.CourseId)
                     .HasConstraintName("FK__Enrollmen__Cours__2C3393D0");
 
-                entity.HasOne(d => d.Student)
+                entity.HasOne(d => d.User)
                     .WithMany(p => p.Enrollments)
-                    .HasForeignKey(d => d.StudentId)
+                    .HasForeignKey(d => d.UserId)
                     .HasConstraintName("FK__Enrollmen__Stude__2B3F6F97");
             });
 

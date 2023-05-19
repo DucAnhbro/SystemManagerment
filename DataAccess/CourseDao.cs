@@ -66,6 +66,7 @@ namespace DataAccess
             }
         }
 
+
         public static void UpdateCourse(CourseDto course)
         {
             try

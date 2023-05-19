@@ -92,13 +92,7 @@ namespace ProjectApi.Controllers
             {
                 return NotFound();
             }
-            var enrollments = course.Enrollments.Where(a => a.CourseId == courseId).ToList();
-            if(enrollments.Count == 0)
-            {
-                return BadRequest("Not found");
-            }
-            _courseRepository.DeleteCourse(course);
-
+            _courseRepository.DeleteCourse(course); 
             return Ok();
         }
     }
