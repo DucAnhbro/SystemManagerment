@@ -7,6 +7,8 @@ using Microsoft.IdentityModel.Tokens;
 using Repository;
 using Repository.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
+using System.Reflection;
 using System.Security.Claims;
 using System.Text;
 
@@ -100,13 +102,24 @@ namespace ProjectApi.Controllers
         }
 
         [HttpPut("updatedUser")]
-        public IActionResult UpdateUser(int userId, AddNewUserDto userDto)
+        public IActionResult UpdateUser(UserDto userDto)
         {
-            var user = _userRepository.GetUserById(userId);
+            var user = _userRepository.GetUserById(userDto.Id);
             if(user == null) return NotFound();
             try
             {
-                _userRepository.UpdateUser(userDto);
+                user.Id = userDto.Id;
+                user.RoleId=userDto.RoleId;
+                user.Username=  userDto.Username;
+                user.Password= userDto.Password;
+                user.FirstName= userDto.FirstName;
+                user.LastName= userDto.LastName;
+                user.DateOfBirth= userDto.DateOfBirth;
+                user.Gender= userDto.Gender;
+                user.Address= userDto.Address;
+                user.PhoneNumber= userDto.PhoneNumber;
+                user.Email = userDto.Email;
+                _userRepository.UpdateUser(user);
             }
             catch (Exception)
             {

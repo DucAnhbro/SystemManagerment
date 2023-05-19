@@ -18,7 +18,7 @@ namespace Repository
         public User GetUserById(int userId) => UserDao.GetUserById(userId);
 
         public void InsertUser(AddNewUserDto userDto) => UserDao.InsertUser(userDto);
-        public void UpdateUser(AddNewUserDto user) => UserDao.UpdateUser(user);
+        public void UpdateUser(User user) => UserDao.UpdateUser(user);
 
         public List<Role> GetAllRoles() => RoleDao.GetAllRoles();
 

@@ -9,7 +9,7 @@ namespace Repository.Interfaces
         User GetUserById(int userId);
         void DeleteUser(User user);
         void InsertUser(AddNewUserDto userDto);
-        void UpdateUser(AddNewUserDto userDto);
+        void UpdateUser(User user);
         public User checkLogin(string email, string password);
         public string GetRoleByEmail(string email);
         public User GetUserByEmail(string email);

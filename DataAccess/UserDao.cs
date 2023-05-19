@@ -71,26 +71,13 @@ namespace DataAccess
                 throw new Exception("Add fail");
             }
         }
-        public static void UpdateUser(AddNewUserDto user)
+        public static void UpdateUser(User user)
         {
             try
             {
                 using (var context = new PRN231_StudentMGTContext())
                 {
-                    var userEntity = new User()
-                    {
-                        RoleId = user.RoleId,
-                        Username = user.Username,
-                        Password = user.Password,
-                        FirstName = user.FirstName,
-                        LastName = user.LastName,
-                        DateOfBirth = user.DateOfBirth,
-                        Gender = user.Gender,
-                        Address = user.Address,
-                        PhoneNumber = user.PhoneNumber,
-                        Email = user.Email
-                    };
-                    context.Users.Update(userEntity);
+                    context.Entry(user).State = EntityState.Modified;
                     context.SaveChanges();
                 }
             }
@@ -126,13 +113,13 @@ namespace DataAccess
                 using (var context = new PRN231_StudentMGTContext())
                 {
                     role = context.Users.Include(u => u.Role).Where(u => u.Email.Equals(email)).Select(u => u.Role.Name).FirstOrDefault();
+                    return role;
                 }
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-            return role;
         }
 
         public static User GetUserByEmail(string email)
@@ -143,13 +130,13 @@ namespace DataAccess
                 using (var context = new PRN231_StudentMGTContext())
                 {
                     user = context.Users.Where(u => u.Email.Equals(email)).FirstOrDefault();
+                    return user;
                 }
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-            return user;
         }
 
         public static void DeleteUser(User user)
